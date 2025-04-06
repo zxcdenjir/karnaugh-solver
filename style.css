@@ -6,12 +6,16 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    /* Современный шрифт */
+    font-family: 'Nunito', sans-serif;
+    /* Более светлый фон */
+    background-color: #f8f9fa;
     color: #333;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    /* Увеличенные отступы */
+    padding: 10px;
 }
 
 header,
@@ -21,9 +25,11 @@ footer {
 }
 
 header h1 {
-    font-size: 2em;
-    font-weight: 700;
-    color: #2196f3;
+    font-size: 2.5em;
+    font-weight: 800;
+    /* Более темный акцентный цвет */
+    color: #007bff;
+    margin-bottom: 10px;
 }
 
 main {
@@ -33,32 +39,56 @@ main {
 
 .controls {
     text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.1em;
+    margin-bottom: 30px;
+    font-size: 1.2em;
+}
+
+.controls label {
+    margin-right: 10px;
+    color: #555;
 }
 
 .controls select {
-    padding: 6px 10px;
+    padding: 8px 15px;
     font-size: 1em;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
     outline: none;
+    /* Улучшенный вид при фокусе */
+    transition: border-color 0.3s ease;
+}
+
+.controls select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 /* Карточный стиль для блоков */
 .card {
-    background: linear-gradient(135deg, #ffffff, #f9f9f9);
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 0 auto 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+    /* Более светлый фон */
+    background-color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 0 auto 30px;
+    /* Мягкая тень */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    max-width: 800px;
+    /* Плавная анимация тени */
     transition: box-shadow 0.3s ease;
 }
 
 .card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Усиление тени при наведении */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-title {
+    font-size: 1.75em;
+    font-weight: 700;
+    color: #343a40;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 /* Стили для контейнера карты */
@@ -68,76 +98,94 @@ main {
 
 table {
     border-collapse: collapse;
-    margin: 0 auto;
+    margin: 20px auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 th,
 td {
-    border: 1px solid #ddd;
-    width: 50px;
-    height: 50px;
+    /* Увеличенные размеры ячеек */
+    width: 60px;
+    height: 60px;
     text-align: center;
+    /* Плавные переходы */
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    /* Тонкие границы */
+    border: 1px solid #eee;
 }
 
 th {
-    background-color: #f0f0f0;
-    font-weight: 500;
+    background-color: #e9ecef;
+    font-weight: 600;
+    color: #495057;
 }
 
 td {
-    background-color: #fafafa;
+    background-color: #f8f9fa;
     cursor: pointer;
+    font-size: 1.1em;
 }
 
 td.active {
-    background-color: #4caf50;
+    /* Более яркий цвет активной ячейки */
+    background-color: #28a745;
     color: #fff;
     font-weight: 700;
-
 }
 
 /* Стили для кнопок */
 .actions {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .btn {
-    background: linear-gradient(135deg, #2196f3, #21cbf3);
+    /* Общие стили для кнопок */
     color: #fff;
     border: none;
-    padding: 12px 24px;
+    padding: 14px 30px;
     margin: 5px;
-    font-size: 1em;
-    border-radius: 4px;
+    font-size: 1.1em;
+    border-radius: 8px;
     cursor: pointer;
+    /* Плавный переход и тень */
     transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    outline: none;
+}
+
+.btn-primary {
+    /* Градиент для основной кнопки */
+    background: linear-gradient(135deg, #007bff, #00bfff);
+}
+
+.btn-secondary {
+    /* Красный градиент для вторичной кнопки */
+    background: linear-gradient(135deg, #dc3545, #f44336);
 }
 
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    /* Поднятие кнопки при наведении */
+    transform: translateY(-3px);
+    /* Усиление тени при наведении */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 .btn:active {
+    /* Возврат в исходное положение при нажатии */
     transform: translateY(0);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.btn.btn-secondary {
-    background-color: #f44336;
-}
-
-.btn.btn-secondary:hover {
-    background-color: #d32f2f;
+    /* Уменьшение тени при нажатии */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
 /* Стили для результата */
 .result {
-    font-size: 1.2em;
+    font-size: 1.3em;
     text-align: center;
+    color: #555;
+    margin-top: 20px;
 }
 
 /* Стили для отображения инверсии – черта над буквой */
@@ -148,19 +196,46 @@ td.active {
 /* Адаптивность */
 @media (max-width: 768px) {
     body {
-        padding: 10px;
+        padding: 5px;
     }
 
     header h1 {
-        font-size: 1.5em;
+        font-size: 2em;
     }
 
     .card {
-        padding: 15px;
-        margin: 10px auto;
+        padding: 20px;
+        margin: 15px auto;
     }
 
-    table th, table td {
+    table th,
+    table td {
+        width: 50px;
+        height: 50px;
+        font-size: 0.9em;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 1em;
+    }
+
+    .result {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.7em;
+    }
+
+    .controls {
+        font-size: 1em;
+    }
+
+    table th,
+    table td {
         width: 40px;
         height: 40px;
     }
@@ -169,25 +244,9 @@ td.active {
         padding: 10px 20px;
         font-size: 0.9em;
     }
-}
 
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 1.2em;
-    }
-
-    .controls {
-        font-size: 0.9em;
-    }
-
-    table th, table td {
-        width: 30px;
-        height: 30px;
-    }
-
-    .btn {
-        padding: 8px 16px;
-        font-size: 0.8em;
+    .card {
+        padding: 15px;
     }
 }
 

@@ -6,35 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Решение Карты Карно</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Подключение Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Подключение шрифта Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <header>
-        <h1>Решение Карты Карно</h1>
+    <header class="header">
+        <div class="container">
+            <h1>Решение Карты Карно</h1>
+        </div>
     </header>
-    <main>
-        <section class="controls">
-            <label for="varCount">Количество переменных:</label>
-            <select id="varCount">
-                <option value="2">2 переменные</option>
-                <option value="3">3 переменные</option>
-                <option value="4" selected>4 переменные</option>
-            </select>
-        </section>
-        <section id="kmapCard" class="card">
-            <div id="kmapContainer" class="kmap-container">
-                <!-- Карта Карно будет сгенерирована динамически -->
-            </div>
-        </section>
-        <section class="actions">
-            <button id="solveBtn" class="btn">Решить</button>
-            <button id="clearBtn" class="btn btn-secondary">Очистить</button>
-        </section>
-        <section id="resultCard" class="card result">
-            <div id="result"></div>
-        </section>
+    <main class="main">
+        <div class="container">
+            <section class="controls">
+                <label for="varCount">Количество переменных:</label>
+                <select id="varCount" class="select">
+                    <option value="2">2 переменные</option>
+                    <option value="3">3 переменные</option>
+                    <option value="4" selected>4 переменные</option>
+                </select>
+            </section>
+            <section id="kmapCard" class="card">
+                <h2 class="card-title">Карта Карно</h2>
+                <div id="kmapContainer" class="kmap-container">
+                    <!-- Карта Карно будет сгенерирована динамически -->
+                </div>
+            </section>
+            <section class="actions">
+                <button id="solveBtn" class="btn btn-primary">Решить</button>
+                <button id="clearBtn" class="btn btn-secondary">Очистить</button>
+            </section>
+            <section id="resultCard" class="card">
+                <h2 class="card-title">Результат</h2>
+                <div id="result"></div>
+            </section>
+        </div>
     </main>
     <script src="script.js"></script>
 </body>
