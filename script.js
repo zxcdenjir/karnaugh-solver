@@ -52,17 +52,39 @@ function buildKMap() {
     let table = document.createElement('table');
     let thead = document.createElement('thead');
     let headRow = document.createElement('tr');
+
+    // Пустая клетка с текстом переменных
     let emptyTh = document.createElement('th');
+    if (numVars === 4) {
+        emptyTh.innerHTML = `<div style="position: relative; width: 50px; height: 50px;">
+                                <span style="position: absolute; top: 5px; right: 5px; font-size: 0.9em;">CD</span>
+                                <span style="position: absolute; bottom: 5px; left: 5px; font-size: 0.9em;">AB</span>
+                                <div style="position: absolute; top: 50%; left: 50%; width: 70%; height: 2px; 
+                                            background-color: black; transform: translate(-50%, -50%) rotate(45deg);"></div>
+                             </div>`;
+    } else if (numVars === 3) {
+        emptyTh.innerHTML = `<div style="position: relative; width: 50px; height: 50px;">
+                                <span style="position: absolute; top: 5px; right: 5px; font-size: 0.9em;">BC</span>
+                                <span style="position: absolute; bottom: 5px; left: 5px; font-size: 0.9em;">A</span>
+                                <div style="position: absolute; top: 50%; left: 50%; width: 70%; height: 2px; 
+                                            background-color: black; transform: translate(-50%, -50%) rotate(45deg);"></div>
+                             </div>`;
+    } else if (numVars === 2) {
+        emptyTh.innerHTML = `<div style="position: relative; width: 50px; height: 50px;">
+                                <span style="position: absolute; top: 5px; right: 5px; font-size: 0.9em;">B</span>
+                                <span style="position: absolute; bottom: 5px; left: 5px; font-size: 0.9em;">A</span>
+                                <div style="position: absolute; top: 50%; left: 50%; width: 70%; height: 2px; 
+                                            background-color: black; transform: translate(-50%, -50%) rotate(45deg);"></div>
+                             </div>`;
+    } else {
+        emptyTh.textContent = ""; // Оставляем пустым для других случаев
+    }
     headRow.appendChild(emptyTh);
+
     // Заголовки столбцов
     for (let c = 0; c < cols; c++) {
         let th = document.createElement('th');
-        if (numVars === 2)
-            th.textContent = "B: " + colLabels[c];
-        else if (numVars === 3)
-            th.textContent = "BC: " + colLabels[c];
-        else
-            th.textContent = "CD: " + colLabels[c];
+        th.textContent = colLabels[c]; // Убираем буквы
         headRow.appendChild(th);
     }
     thead.appendChild(headRow);
@@ -74,22 +96,16 @@ function buildKMap() {
     for (let r = 0; r < rows; r++) {
         let row = document.createElement('tr');
         let th = document.createElement('th');
-        if (numVars === 2)
-            th.textContent = "A: " + rowLabels[r];
-        else if (numVars === 3)
-            th.textContent = "A: " + rowLabels[r];
-        else
-            th.textContent = "AB: " + rowLabels[r];
+        th.textContent = rowLabels[r]; // Убираем буквы
         row.appendChild(th);
         for (let c = 0; c < cols; c++) {
             let cell = document.createElement('td');
             let minterm = getMintermIndex(r, c);
             cell.setAttribute('data-minterm', minterm);
-            // По умолчанию значение 0
+            // Значение по умолчанию "0"
             cell.textContent = "0";
             cell.addEventListener('click', function () {
                 cell.classList.toggle('active');
-                // Переключаем между 0 и 1
                 cell.textContent = cell.classList.contains('active') ? '1' : '0';
             });
             row.appendChild(cell);
@@ -103,7 +119,7 @@ function buildKMap() {
     resultDiv.innerHTML = "";
 }
 
-// Инициализация карты при загрузке
+/* Инициализация карты при загрузке */
 buildKMap();
 
 /* ------------------- Алгоритм минимизации ------------------- */
@@ -145,7 +161,6 @@ function quineMcCluskey(minterms, numVars) {
         let groups = {};
         let newTerms = [];
 
-        // Группировка по числу единиц (без учета тире)
         for (let t of terms) {
             let ones = t.term.replace(/-/g, "").split("").filter(x => x === "1").length;
             if (!groups[ones]) groups[ones] = [];
@@ -163,7 +178,6 @@ function quineMcCluskey(minterms, numVars) {
                     if (combined !== null) {
                         t1.combined = true;
                         t2.combined = true;
-                        // Проверка на дублирование
                         let exists = newTerms.some(x => x.term === combined &&
                             JSON.stringify(x.minterms) === JSON.stringify(t1.minterms.concat(t2.minterms).sort((a, b) => a - b)));
                         if (!exists) {
@@ -242,13 +256,12 @@ function findEssentialPrimeImplicants(primeImplicants, minterms) {
     return essential;
 }
 
-// Функция для форматирования литерала с учетом инверсии (инвертированная – с чертой над буквой)
+// Форматирование литерала с учётом инверсии (черта над буквой)
 function literalHTML(variable, inverted) {
     return inverted ? `<span class="overline">${variable}</span>` : variable;
 }
 
-// Преобразование внутреннего представления терма в SOP‑выражение (HTML)
-// Если значение в терме: '1' => переменная без инверсии, '0' => переменная с инверсией.
+// Преобразование терма в SOP‑выражение (HTML)
 function termToSOPHTML(term) {
     const vars = ["A", "B", "C", "D"];
     let out = "";
@@ -258,13 +271,11 @@ function termToSOPHTML(term) {
         } else if (term[i] === "0") {
             out += literalHTML(vars[i], true);
         }
-        // Если тире, переменная не участвует
     }
     return out === "" ? "1" : out;
 }
 
-// Преобразование внутреннего представления терма в POS‑выражение (HTML)
-// Для maxterm группы: если значение постоянно 0, литерал берется без инверсии; если 1 — в инверсии.
+// Преобразование терма в POS‑выражение (HTML)
 function termToPOSHTML(term) {
     const vars = ["A", "B", "C", "D"];
     let out = [];
@@ -274,7 +285,6 @@ function termToPOSHTML(term) {
         } else if (term[i] === "1") {
             out.push(literalHTML(vars[i], true));
         }
-        // Если тире, переменная не участвует
     }
     return out.length > 0 ? "(" + out.join(" + ") + ")" : "";
 }
@@ -289,7 +299,6 @@ function minimizeSOP(minterms, numVars) {
 }
 
 // Минимизация функции в форме POS
-// Для этого вычисляем maxterms (ячейки с 0) и минимизируем их группировку.
 function minimizePOS(selectedMinterms, numVars) {
     const total = Math.pow(2, numVars);
     if (selectedMinterms.length === total) return "1";
@@ -299,7 +308,6 @@ function minimizePOS(selectedMinterms, numVars) {
     for (let i = 0; i < total; i++) {
         allMinterms.push(i);
     }
-    // Макстермы: ячейки, где функция равна 0
     let maxterms = allMinterms.filter(m => !selectedMinterms.includes(m));
 
     let primeImplicants = quineMcCluskey(maxterms, numVars);
@@ -321,12 +329,11 @@ document.getElementById('solveBtn').addEventListener('click', () => {
     let sopExpression = minimizeSOP(selectedMinterms, numVars);
     let posExpression = minimizePOS(selectedMinterms, numVars);
 
-    // Выводим оба результата с HTML‑форматированием
     resultDiv.innerHTML = `<div>Сумма произведений: ${sopExpression}</div>
                          <div>Произведение сумм: ${posExpression}</div>`;
 });
 
-// Обработка кнопки "Очистить"
+// Обработка нажатия кнопки "Очистить"
 document.getElementById('clearBtn').addEventListener('click', () => {
     cells.forEach(cell => {
         cell.classList.remove('active');
