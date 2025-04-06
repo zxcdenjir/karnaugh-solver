@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Решение Карты Карно</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Решение Карты Карно</h1>
+    <div class="controls">
+        <label for="varCount">Количество переменных:</label>
+        <select id="varCount">
+            <option value="2">2 переменные</option>
+            <option value="3">3 переменные</option>
+            <option value="4" selected>4 переменные</option>
+        </select>
+    </div>
+    <div id="kmapContainer" class="kmap-container">
+        <!-- Карта Карно будет сгенерирована динамически -->
+    </div>
+    <div class="buttons">
+        <button id="solveBtn">Решить</button>
+        <button id="clearBtn">Очистить</button>
+    </div>
+    <div class="result" id="result"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+.controls {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+.kmap-container {
+    display: inline-block;
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+th,
+td {
+    border: 1px solid #333;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+}
+
+th {
+    background-color: #ddd;
+    font-weight: bold;
+}
+
+td {
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+td.active {
+    background-color: #8bc34a;
+    color: #fff;
+    font-weight: bold;
+}
+
+.buttons {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #2196f3;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #1976d2;
+}
+
+.result {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Стили для отображения инверсии – черта над буквой */
+.overline {
+    text-decoration: overline;
+}
