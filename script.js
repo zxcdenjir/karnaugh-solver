@@ -57,24 +57,24 @@ function buildKMap() {
     let emptyTh = document.createElement('th');
     if (numVars === 4) {
         emptyTh.innerHTML = `<div style="position: relative; width: 50px; height: 50px;">
-                                <span style="position: absolute; top: 5px; right: 5px; font-size: 0.9em;">CD</span>
-                                <span style="position: absolute; bottom: 5px; left: 5px; font-size: 0.9em;">AB</span>
+                                <span style="position: absolute; top: 5px; right: 0; font-size: 0.9em;">CD</span>
+                                <span style="position: absolute; bottom: 5px; left: 10px; font-size: 0.9em;">AB</span>
                                 <div style="position: absolute; top: 50%; left: 50%; width: 70%; height: 2px; 
-                                            background-color: black; transform: translate(-50%, -50%) rotate(45deg);"></div>
+                                            background-color: black; transform: translate(-33%) rotate(45deg);"></div>
                              </div>`;
     } else if (numVars === 3) {
         emptyTh.innerHTML = `<div style="position: relative; width: 50px; height: 50px;">
-                                <span style="position: absolute; top: 5px; right: 5px; font-size: 0.9em;">BC</span>
-                                <span style="position: absolute; bottom: 5px; left: 5px; font-size: 0.9em;">A</span>
+                                <span style="position: absolute; top: 5px; right: 0px; font-size: 0.9em;">BC</span>
+                                <span style="position: absolute; bottom: 5px; left: 10px; font-size: 0.9em;">A</span>
                                 <div style="position: absolute; top: 50%; left: 50%; width: 70%; height: 2px; 
-                                            background-color: black; transform: translate(-50%, -50%) rotate(45deg);"></div>
+                                            background-color: black; transform: translate(-33%) rotate(45deg);"></div>
                              </div>`;
     } else if (numVars === 2) {
         emptyTh.innerHTML = `<div style="position: relative; width: 50px; height: 50px;">
-                                <span style="position: absolute; top: 5px; right: 5px; font-size: 0.9em;">B</span>
-                                <span style="position: absolute; bottom: 5px; left: 5px; font-size: 0.9em;">A</span>
+                                <span style="position: absolute; top: 5px; right: 0px; font-size: 0.9em;">B</span>
+                                <span style="position: absolute; bottom: 5px; left: 10px; font-size: 0.9em;">A</span>
                                 <div style="position: absolute; top: 50%; left: 50%; width: 70%; height: 2px; 
-                                            background-color: black; transform: translate(-50%, -50%) rotate(45deg);"></div>
+                                            background-color: black; transform: translate(-33%) rotate(45deg);"></div>
                              </div>`;
     } else {
         emptyTh.textContent = ""; // Оставляем пустым для других случаев
