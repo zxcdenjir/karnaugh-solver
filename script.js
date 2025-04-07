@@ -46,6 +46,28 @@ function buildKMap() {
             const colMap = [0, 1, 3, 2];
             return rowMap[r] * 4 + colMap[c];
         };
+    } else if (numVars === 5) {
+        // 5 переменных: 4 строки (переменные A и B) и 8 столбцов (переменные C, D, E по Gray code)
+        rows = 4;
+        cols = 8;
+        rowLabels = ["00", "01", "11", "10"]; // AB
+        colLabels = ["000", "001", "011", "010", "110", "111", "101", "100"]; // CDE
+        getMintermIndex = (r, c) => {
+            const rowMap = [0, 1, 3, 2];
+            const colMap = [0, 1, 3, 2, 6, 7, 5, 4];
+            return rowMap[r] * 8 + colMap[c];
+        };
+    } else if (numVars === 6) {
+        // 6 переменных: 8 строк (переменные A, B, C) и 8 столбцов (переменные D, E, F по Gray code)
+        rows = 8;
+        cols = 8;
+        rowLabels = ["000", "001", "011", "010", "110", "111", "101", "100"]; // ABC
+        colLabels = ["000", "001", "011", "010", "110", "111", "101", "100"]; // DEF
+        getMintermIndex = (r, c) => {
+            const rowMap = [0, 1, 3, 2, 6, 7, 5, 4];
+            const colMap = [0, 1, 3, 2, 6, 7, 5, 4];
+            return rowMap[r] * 8 + colMap[c];
+        };
     }
 
     // Создаём таблицу
@@ -55,7 +77,22 @@ function buildKMap() {
 
     // Пустая клетка с текстом переменных
     let emptyTh = document.createElement('th');
-    if (numVars === 4) {
+    if (numVars === 6) {
+        emptyTh.innerHTML = `<div style="position: relative; width: 50px; height: 50px;">
+                                <span style="position: absolute; top: 0px; right: -5px; font-size: 0.9em;">DEF</span>
+                                <span style="position: absolute; bottom: 0px; left: 5px; font-size: 0.9em;">ABC</span>
+                                <div style="position: absolute; top: 50%; left: 50%; width: 70%; height: 2px; 
+                                            background-color: black; transform: translate(-33%) rotate(45deg);"></div>
+                             </div>`;
+    }
+    else if (numVars === 5) {
+        emptyTh.innerHTML = `<div style="position: relative; width: 50px; height: 50px;">
+                                <span style="position: absolute; top: 0px; right: 0; font-size: 0.9em;">DEF</span>
+                                <span style="position: absolute; bottom: 0px; left: 10px; font-size: 0.9em;">AB</span>
+                                <div style="position: absolute; top: 50%; left: 50%; width: 70%; height: 2px; 
+                                            background-color: black; transform: translate(-33%) rotate(45deg);"></div>
+                             </div>`;
+    } else if (numVars === 4) {
         emptyTh.innerHTML = `<div style="position: relative; width: 50px; height: 50px;">
                                 <span style="position: absolute; top: 5px; right: 0; font-size: 0.9em;">CD</span>
                                 <span style="position: absolute; bottom: 5px; left: 10px; font-size: 0.9em;">AB</span>
@@ -263,7 +300,7 @@ function literalHTML(variable, inverted) {
 
 // Преобразование терма в SOP‑выражение (HTML)
 function termToSOPHTML(term) {
-    const vars = ["A", "B", "C", "D"];
+    const vars = ["A", "B", "C", "D", "E", "F"]; // Добавлены E и F
     let out = "";
     for (let i = 0; i < term.length; i++) {
         if (term[i] === "1") {
@@ -277,7 +314,7 @@ function termToSOPHTML(term) {
 
 // Преобразование терма в POS‑выражение (HTML)
 function termToPOSHTML(term) {
-    const vars = ["A", "B", "C", "D"];
+    const vars = ["A", "B", "C", "D", "E", "F"]; // Добавлены E и F
     let out = [];
     for (let i = 0; i < term.length; i++) {
         if (term[i] === "0") {
